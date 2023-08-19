@@ -4,11 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/app_bolcs.dart';
 import 'package:ulearning_app/app_events.dart';
 import 'package:ulearning_app/app_states.dart';
+import 'package:ulearning_app/pages/bloc_providers.dart';
+import 'package:ulearning_app/pages/register/register.dart';
+import 'package:ulearning_app/pages/sing_in/bloc/sing_in_blocs.dart';
 import 'package:ulearning_app/pages/sing_in/sing_in.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_app/pages/welcome/welcome.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -18,31 +26,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => WelcomeBloc(),
-        ),
-        BlocProvider(
-          create: (context) => AppBlocs(),
-        )
-      ],
-      child: ScreenUtilInit(
-        builder: (context, child) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(
+        providers: AppBlocProviders.allBlocProviders,
+        child: ScreenUtilInit(
+          builder: (context, child) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+                appBarTheme: const AppBarTheme(
               elevation: 0,
               backgroundColor: Colors.white,
-            )
+            )),
+            routes: {
+              "myHomePage": (context) => const MyHomePage(),
+              "singIn": (context) => const SingIn(),
+              "register": (context) => const Register(),
+            },
+            home: const Welcome(),
           ),
-          routes: {
-            "myHomePage": (context) => const MyHomePage(),
-            "singIn": (context) => const SingIn()
-          },
-          home: const Welcome(),
-        ),
-      )
-    );
+        ));
   }
 }
 
@@ -78,13 +78,15 @@ class MyHomePage extends StatelessWidget {
           children: [
             FloatingActionButton(
               heroTag: "heroTag1",
-              onPressed: ()=> BlocProvider.of<AppBlocs>(context).add(Increment()),
+              onPressed: () =>
+                  BlocProvider.of<AppBlocs>(context).add(Increment()),
               tooltip: 'Increment',
               child: const Icon(Icons.add),
             ),
             FloatingActionButton(
               heroTag: "heroTag2",
-              onPressed: ()=> BlocProvider.of<AppBlocs>(context).add(Decrement()),
+              onPressed: () =>
+                  BlocProvider.of<AppBlocs>(context).add(Decrement()),
               tooltip: 'Increment',
               child: const Icon(Icons.remove),
             ),

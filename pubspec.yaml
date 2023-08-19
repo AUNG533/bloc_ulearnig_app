@@ -40,6 +40,10 @@ dependencies:
   dots_indicator:
   intl:
   cloud_firestore:
+  firebase_auth: ^4.7.3
+  firebase_core: ^2.15.0
+  firebase_messaging: ^14.5.3
+  fluttertoast: ^8.2.2
 
 dev_dependencies:
   flutter_test:

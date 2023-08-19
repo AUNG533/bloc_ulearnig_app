@@ -14,3 +14,21 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+// add
+android/app/build.gradle
+apply plugin: "com.google.gms.google-services"
+
+dependencies {
+implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
+implementation 'com.google.firebase:firebase-analytics-ktx'
+}
+
+android/build.gradle
+buildscript {
+
+    dependencies {
+        
+        classpath "com.google.gms:google-services:4.3.15"
+    }
+}
