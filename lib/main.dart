@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/app_bolcs.dart';
 import 'package:ulearning_app/app_events.dart';
 import 'package:ulearning_app/app_states.dart';
+import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/pages/bloc_providers.dart';
 import 'package:ulearning_app/pages/register/register.dart';
 import 'package:ulearning_app/pages/sing_in/bloc/sing_in_blocs.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
                 appBarTheme: const AppBarTheme(
+                  iconTheme: IconThemeData(color: AppColors.primaryText),
               elevation: 0,
               backgroundColor: Colors.white,
             )),
