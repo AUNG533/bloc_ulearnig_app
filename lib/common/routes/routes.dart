@@ -1,6 +1,2 @@
-class AppRoutes {
-  static const INITTAL = "/";
-  static const APPLICATION = "/application";
-  static const SING_IN = "/sing_in";
-  static const REGISTER = "/register";
-}
+export 'pages.dart';
+export 'names.dart';

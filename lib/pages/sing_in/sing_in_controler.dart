@@ -27,24 +27,25 @@ class SingInController {
           return;
         }
         try {
-          final credential =
-              await FirebaseAuth.instance.signInWithEmailAndPassword(
-            email: emailAddress,
-            password: password,
+          final credential = await FirebaseAuth.instance
+              .signInWithEmailAndPassword(
+                  email: emailAddress, password: password,
           );
-          if(credential.user == null){
+          if (credential.user == null) {
             toastInfo(msg: "yor don't exist");
             return;
           }
-          if(!credential.user!.emailVerified){
+          if (!credential.user!.emailVerified) {
             //
             toastInfo(msg: "yor need to verify your email account");
-            return;
+            // return;
           }
 
           var user = credential.user;
-          if(user != null) {
+          if (user != null) {
             print('user exist');
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil("/application", (route) => false);
             //we  got error getting user from firebase
           } else {
             toastInfo(msg: "Currently your are not a user of this app");
@@ -52,7 +53,7 @@ class SingInController {
             // we have error getting user from firebase
           }
         } on FirebaseAuthException catch (e) {
-          if(e.code == 'user-not-found') {
+          if (e.code == 'user-not-found') {
             print('No user found for that email.');
             toastInfo(msg: "No user found for that email.");
             // toastInfo(mag: "No user found for that email.")
@@ -60,7 +61,7 @@ class SingInController {
             print('Wrong password provided for that user.');
             toastInfo(msg: "Wrong password provided for that user.");
             // toastInfo(mag: "Wrong password provided for that user.")
-          } else if(e.code == 'invalid-email'){
+          } else if (e.code == 'invalid-email') {
             toastInfo(msg: "Your email address format is wrong");
           }
         }
