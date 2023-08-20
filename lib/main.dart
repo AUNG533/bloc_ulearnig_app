@@ -4,16 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/app_bolcs.dart';
 import 'package:ulearning_app/app_events.dart';
 import 'package:ulearning_app/app_states.dart';
+import 'package:ulearning_app/common/routes/pages.dart';
 import 'package:ulearning_app/common/values/colors.dart';
-import 'package:ulearning_app/pages/bloc_providers.dart';
-import 'package:ulearning_app/pages/register/register.dart';
-import 'package:ulearning_app/pages/sing_in/bloc/sing_in_blocs.dart';
-import 'package:ulearning_app/pages/sing_in/sing_in.dart';
-import 'package:ulearning_app/pages/welcome/bloc/welcome_bloc.dart';
-import 'package:ulearning_app/pages/welcome/welcome.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-        providers: AppBlocProviders.allBlocProviders,
+        providers: [...AppPages.allBlocProviders(context)],
         child: ScreenUtilInit(
           builder: (context, child) => MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -37,12 +31,7 @@ class MyApp extends StatelessWidget {
               elevation: 0,
               backgroundColor: Colors.white,
             )),
-            routes: {
-              "myHomePage": (context) => const MyHomePage(),
-              "singIn": (context) => const SingIn(),
-              "register": (context) => const Register(),
-            },
-            home: const Welcome(),
+            onGenerateRoute: AppPages.GenerateRouteSettings,
           ),
         ));
   }

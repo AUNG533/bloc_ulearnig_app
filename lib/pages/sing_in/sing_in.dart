@@ -59,7 +59,7 @@ class _SingInState extends State<SingIn> {
                     SingInController(context: context).handleSingIn("email");
                   }),
                   buildLogInAdnRegButton("Sign up", "register", () {
-                    Navigator.of(context).pushNamed("register");
+                    Navigator.of(context).pushNamed("/register");
                   }),
                 ],
               ),
