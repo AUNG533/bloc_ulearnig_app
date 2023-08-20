@@ -53,9 +53,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
                   showUnselectedLabels: false,
                   selectedItemColor: AppColors.primaryElement,
                   unselectedItemColor: AppColors.primaryFourthElementText,
-                  items: [
-
-                  ],
+                  items: bottomTabs,
                 ),
               )
           ),

@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:ulearning_app/common/values/colors.dart';
+import 'package:ulearning_app/common/values/constant.dart';
+import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_events.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_states.dart';
@@ -132,7 +134,9 @@ class _WelcomeState extends State<Welcome> {
             } else {
               //jump to anew page
               // Navigator.of(context).push(MaterialPageRoute(builder: (context) => const MyHomePage()));
-            Navigator.of(context).pushNamedAndRemoveUntil("/sing_in", (route) => false);
+              Global.storageService.setBool(AppConstants.STORAGE_OPEN_FIRST_TIME, true);
+              print("The vale is ${Global.storageService.getDeviceFirstOpen()}");
+              Navigator.of(context).pushNamedAndRemoveUntil("/sing_in", (route) => false);
             }
           },
           child: Container(
