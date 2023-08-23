@@ -55,6 +55,7 @@ class _SingInState extends State<SingIn> {
                     ),
                   ),
                   forgotPassword(),
+                  SizedBox(height: 70.w),
                   buildLogInAdnRegButton("Log In", "login", () {
                     SingInController(context: context).handleSingIn("email");
                   }),

@@ -63,7 +63,7 @@ class _RegisterState extends State<Register> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 20.w),
+                    margin: EdgeInsets.only(left: 60.w, bottom: 60.w),
                     child: reusableText("Enter your details below and free sing up"),
                   ),
                   buildLogInAdnRegButton("Sign up", "register", () {
